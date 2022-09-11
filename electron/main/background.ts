@@ -59,6 +59,9 @@ ipcMain.on('generate', (event, arg) => {
   
   PythonShell.run('main.py', options, function (err, results) {
     // results is an array consisting of messages collected during execution
+    if (err)
+      throw err
+    console.log('results', results)
     event.sender.send('generate', {result: err ? "error" : "success", data: results})
   })
 
